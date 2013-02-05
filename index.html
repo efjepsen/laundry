@@ -1,10 +1,9 @@
 $def with (devices)
 $def device(name):
-    <td><label>\
-    <input type="checkbox" name="devices" value="$name"\
-    $if devices[name].state:
-         checked="checked"\
-    /><b>$name</b><br/>$devices[name]</label></td>\
+    <td><label><input type="checkbox" name="devices" \
+    $if devices[name].state: checked \
+    value="$name"/><b>$name</b><br/>\
+    $devices[name]</label></td>\
 <!-- Written by dlaw@mit.edu in February 2013 -->
 <html><head><title>Laundry</title>\
 <meta http-equiv="refresh" content="30"/>\
