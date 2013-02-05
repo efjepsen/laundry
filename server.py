@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import web, time, RPi.GPIO
+import RPi.GPIO, threading, time, web
 
 RPi.GPIO.setmode(RPi.GPIO.BOARD)
 web.config.smtp_server = 'outgoing.mit.edu'
@@ -9,7 +9,7 @@ web.config.debug = False
 class Device:
     def __init__(self, port):
         """Create a device connected to the specified GPIO port."""
-        self.port, self.name = port, 'Laundry'
+        self.port = port
         self.state, self.time = False, time.time()
         self.emails = []
         RPi.GPIO.setup(port, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)        
@@ -44,7 +44,7 @@ devices = {'Mr. Washer': Device(21),  # GPIO9
            'Mrs. Washer': Device(22),  # GPIO25
            'Mr. Dryer': Device(23),  # GPIO11
            'Mrs. Dryer': Device(24)}  # GPIO8
-for device in devices: devices[device].name = device
+for name in devices: devices[name].name = name
 
 urls = ('/', 'Server', '/notify', 'Server')
 
@@ -54,11 +54,19 @@ class Server:
     def POST(self):
         data = web.input(devices=[])
         # TODO: validate email address
-        for device in data.devices:
-            devices[device].add_email(data.email)
+        for name in data.devices:
+            devices[name].add_email(data.email)
         raise web.seeother('/')
 
-# TODO: spin off a thread to call update() in the background
+# spin off a thread to call update() in the background
+def monitor():
+    while True:
+        for name in devices:
+            devices[name].update()
+        time.sleep(1)
+thread = threading.Thread(target=monitor)
+thread.daemon = True
+thread.start()
 
 app = web.application(urls, globals())
 if __name__ == "__main__": app.run()

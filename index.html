@@ -1,37 +1,18 @@
 $def with (devices)
 $def device(name):
-    <b>$name</b><br/>$devices[name]<br/>
-    <input type="checkbox" name="devices" value="$name"/>
-
-<html>
-  <!-- Written by dlaw@mit.edu in February 2013 -->
-  <head>
-    <title>Laundry</title>
-    <style>
-      table { border-spacing: 22px; }
-      tr { height: 50%; }     
-      td { width: 50%; text-align: center; }
-    </style>
-  </head>
-  <body>
-    <center>
-      <h2>Heteronormative Laundry</h2>
-      <p>An Assclowns Inc. Production</p>
-      <form method="post" action="notify">
-	<table>
-	  <tr>
-	    <td>$:device('Mrs. Dryer')</td>
-	    <td>$:device('Mr. Dryer')</td>
-	  </tr>
-	  <tr>
-	    <td>$:device('Mrs. Washer')</td>
-	    <td>$:device('Mr. Washer')</td>
-	  </tr>
-	</table>
-	Email address:
-	<input type="text" name="email"/>
-	<input type="submit" value="Notify me"/>
-      </form>
-    </center>
-  </body>
-</html>
+    <td width=50%><label>\
+    <input type="checkbox" name="devices" value="$name"/>\
+    <b>$name</b><br/>$devices[name]</label></td>\
+<!-- Written by dlaw@mit.edu in February 2013 -->
+<html><head><title>Laundry</title>\
+<meta http-equiv="refresh" content="30"/>\
+</head><body><center>\
+<h2>Heteronormative Laundry</h2>\
+<p>An Assclowns Inc. Production</p>\
+<form method="post" action="notify">\
+<table style="border-spacing: 22px">\
+<tr>$:device('Mrs. Dryer')$:device('Mr. Dryer')</tr>\
+<tr>$:device('Mrs. Washer')$:device('Mr. Washer')</tr></table>\
+Email address:<input type="text" name="email"/>\
+<input type="submit" value="Notify me"/>\
+</form></center></body></html>
