@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-import RPi.GPIO, threading, time, web
+import os, RPi.GPIO, threading, time, web
 
+os.chdir('/home/pi/laundry/')
 RPi.GPIO.setmode(RPi.GPIO.BOARD)
 web.config.smtp_server = 'outgoing.mit.edu'
 web.config.debug = False
@@ -30,10 +31,12 @@ class Device:
     def notify(self):
         """Notify email addresses that the machine has turned off."""
         for email in self.emails:
-            web.sendmail('clothes@mit.edu', email,
-                         '{} is done'.format(self.name),
-                         'Your laundry took {:.2f} minutes.'
-                         .format(self.get_time()))
+            try:
+                web.sendmail('clothes@mit.edu', email,
+                             '{} is done'.format(self.name),
+                             'Your laundry took {:.1f} minutes.'
+                             .format(self.get_time()))
+            except: pass
     def __str__(self):
         """Format a string suitable for display in HTML."""
         self.update()
@@ -53,7 +56,6 @@ class Server:
         return web.template.render('.').index(devices)
     def POST(self):
         data = web.input(devices=[])
-        # TODO: validate email address
         for name in data.devices:
             devices[name].add_email(data.email)
         raise web.seeother('/')
