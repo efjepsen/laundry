@@ -1,9 +1,10 @@
 $def with (devices)
 $def device(name):
-    $name:<br/>$devices[name]<br/>
+    <b>$name</b><br/>$devices[name]<br/>
     <input type="checkbox" name="devices" value="$name"/>
 
 <html>
+  <!-- Written by dlaw@mit.edu in February 2013 -->
   <head>
     <title>Laundry</title>
     <style>
@@ -13,21 +14,24 @@ $def device(name):
     </style>
   </head>
   <body>
-    <h2>Heteronormative Laundry</h2>
-    <form method="post" action="notify">
-      <table>
-	<tr>
-	  <td>$:device('Mrs. Dryer')</td>
-	  <td>$:device('Mr. Dryer')</td>
-	</tr>
-	<tr>
-	  <td>$:device('Mrs. Washer')</td>
-	  <td>$:device('Mr. Washer')</td>
-	</tr>
-      </table>
-      Email address:
-      <input type="text" name="email"/>
-      <input type="submit" value="Notify me"/>
-    </form>
+    <center>
+      <h2>Heteronormative Laundry</h2>
+      <p>An Assclowns Inc. Production</p>
+      <form method="post" action="notify">
+	<table>
+	  <tr>
+	    <td>$:device('Mrs. Dryer')</td>
+	    <td>$:device('Mr. Dryer')</td>
+	  </tr>
+	  <tr>
+	    <td>$:device('Mrs. Washer')</td>
+	    <td>$:device('Mr. Washer')</td>
+	  </tr>
+	</table>
+	Email address:
+	<input type="text" name="email"/>
+	<input type="submit" value="Notify me"/>
+      </form>
+    </center>
   </body>
 </html>

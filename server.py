@@ -4,7 +4,7 @@ import web, time, RPi.GPIO
 
 RPi.GPIO.setmode(RPi.GPIO.BOARD)
 web.config.smtp_server = 'outgoing.mit.edu'
-# web.config.debug = False
+web.config.debug = False
 
 class Device:
     def __init__(self, port):
@@ -38,7 +38,7 @@ class Device:
         """Format a string suitable for display in HTML."""
         self.update()
         return ('on for {:.0f} min'.format(self.get_time())
-                if self.state else 'off')
+                if self.state else 'not in use')
 
 devices = {'Mr. Washer': Device(21),  # GPIO9
            'Mrs. Washer': Device(22),  # GPIO25
