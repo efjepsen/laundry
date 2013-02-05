@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# Written by dlaw in February 2013
+
 import os, RPi.GPIO, threading, time, web
 
 os.chdir('/home/pi/laundry/')

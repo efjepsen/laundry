@@ -2,17 +2,17 @@ $def with (devices)
 $def device(name):
     <td><label><input type="checkbox" name="devices" \
     $if devices[name].state: checked \
-    value="$name"/><b>$name</b><br/>\
+    value="$name"/><b>$name</b><br>\
     $devices[name]</label></td>\
 <html><head><title>Laundry</title>\
 <meta http-equiv="refresh" content="30"/>\
 </head><body><center>\
 <h2>Heteronormative Laundry</h2>\
-<p>An Assclowns Inc. Production</p>\
+<p>An Assclowns Inc. Production\
 <form method="post" action="notify">\
-<table cellpadding="22px">\
+<table cellpadding="10px">\
 <tr>$:device('Mrs. Dryer')$:device('Mr. Dryer')</tr>\
 <tr>$:device('Mrs. Washer')$:device('Mr. Washer')</tr></table>\
-Email address:<input type="text" name="email"/>\
+<p>Email address:<input type="text" name="email"/>\
 <input type="submit" value="Notify me"/>\
 </form></center></body></html>\
