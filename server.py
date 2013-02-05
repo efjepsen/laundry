@@ -37,6 +37,7 @@ class Device:
                              'Your laundry took {:.1f} minutes.'
                              .format(self.get_time()))
             except: pass
+        self.emails = []
     def __str__(self):
         """Format a string suitable for display in HTML."""
         self.update()
