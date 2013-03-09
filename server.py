@@ -28,7 +28,6 @@ class Device:
         return (time.time() - self.time) / 60
     def add_email(self, email):
         """Add an email address to be notified when the machine turns off."""
-        print(self.emails)
         self.emails.append(email)
     def notify(self):
         """Notify email addresses that the machine has turned off."""
